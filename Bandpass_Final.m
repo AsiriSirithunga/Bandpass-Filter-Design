@@ -70,7 +70,7 @@ for k = 1:bessellimit
     Ialpha = Ialpha + termk;
 end
 
-% Generating I(beta) %%
+% Generating I(beta) 
 
 Ibeta = 1;
 for k = 1:bessellimit
@@ -167,9 +167,9 @@ for each = wi
 end
 
 
-% Using DFT to check the filtering %%
+% Using DFT to check the filtering 
 
-% Filtering using frequency domain multiplication - see function getfiltered.m %%
+% Filtering using frequency domain multiplication - see function getfiltered.m 
 
 Npoint = length(xnt) + length(filter) - 1;  % length for fft in x dimension
 xfft = fft(xnt,Npoint);
