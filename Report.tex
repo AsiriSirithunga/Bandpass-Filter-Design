@@ -1,0 +1,297 @@
+\documentclass[oneside,11pt,onecolumn,a4paper]{report}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+% tables and figures at the end:
+\usepackage{endfloat}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{multirow}
+%\usepackage{pdfpages}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tocbibind}
+\usepackage[toc,page]{appendix}
+\usepackage{float}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.25}
+\usepackage{titlesec}
+ 
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\huge}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+\begin{document}
+
+\begin{titlepage}
+
+\center 
+
+\textbf{\large Department of Electronic and Telecommunication Engineering}\\[0.5cm]
+\textbf{\Large University of Moratuwa}\\[1cm]
+\textbf{\large EN2570 -  Digital Signal Processing}\\[2cm]
+
+\includegraphics[width=0.3\textwidth]{uomlogo}\\[2cm]
+
+	
+\textbf{\Huge {FIR Filter Design}  }\\[2mm]
+\textbf{\Huge{Report}}\\[0.5cm]
+\vspace{5cm}
+\textbf{\large Submitted by}\\[0.5cm]
+\begin{minipage}{0.32\textwidth}
+	\begin{flushleft}
+		{\large SIRITHUNGA M.R.A. }\\[4mm]
+		
+	\end{flushleft}
+\end{minipage}
+\hspace{5mm}
+\begin{minipage}{0.32\textwidth}
+	\begin{flushright}
+		{\large 180609B }\\[4mm]
+		
+	\end{flushright}
+\end{minipage}\\[2cm]
+
+
+\textbf{\large Submitted on}\\[0.1cm]
+\textbf{\Large 05/03/2021} 
+
+\vfill
+\end{titlepage}
+\tableofcontents
+\chapter{Abstract}
+\hspace{4em}This project deals with the designing of the finite impulse response (FIR) bandpass filter. The FIR filter is designed using windowing method in conjunction with the kaiser window. The corresponding theories are going to be explaind according to the prescription that is provided. Matlab R2018a  is used for demonstrations and, the figures shown below  are the corresponding outputs given by the Matlab R2018a. The codes are included in the appendix.
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+
+\chapter{Introduction}
+\hspace{4em}A filter is a component wchich eliminates the undesired parts of the input signal with respect to the users requirements. The digital filters can be seperated by considering the impulse response as\cite{A.Antoniou},
+\begin{itemize}
+  \item finite impulse response (FIR) filters and 
+  \item infinite impulse response (IIR) filters.
+\end{itemize}
+In this report it is going to deal with a FIR bandpass filter in conjunction with the kaiser window. Kiser window method is one of the most fascinating techniques.  
+\pagebreak
+
+
+\chapter{Basic Theories}
+\hspace{4em}This chapter is cited: A.Antoniou's book \cite{A.Antoniou}.The design process of the finite impulse response filters can be categorise into two classical methods.
+\begin{enumerate}
+  \item  Fourier series method or Window method.
+  \item Weighted-Chebyshev method.
+\end{enumerate}
+The fourier series is used in the first method and it will be discussed further with the basic theories later. The weighted-chebyshev method is multivariable optimization method. In order to that window functions are conjuncted with the fourier series method.
+
+\section{Design Using the Fourier Series}
+
+\hspace{4em}The digital filters have a periodic frequency response. The period is equal to the sampling frequecy hence, the frequency response can be denoted as a fourier series as below.
+
+\includegraphics{Screenshot (165)}
+
+By sustituting z=e*jwT to the impulse response of the filter, transfer function can be obtained.
+
+\includegraphics{Screenshot (174)}
+
+There are two major consequences with this fourier seriers method that can be shown because, the fourier series coefficients have beed defined over the range -INF to +INF.
+\begin{itemize}
+  \item The nonrecursive filter obtained is of infinite length.
+  \item The filter is noncausal because the impulse response is nonzero for negative time.
+\end{itemize}
+
+To overcome these problems, the impulse response has truncated. And a causal filter can be obtained by delaying the impulse response or by sampling periods appropriately.
+
+
+\includegraphics{Screenshot (166)}
+
+\section{Use of Window Functions}
+\hspace{4em}The oscilations can be found in the passband and the stopband. It is because of the slow convergance of the fourier series. These are called Gibb's oscillations and the effect of Gibb's oscillations\cite{dspdeer} can be reduced by the complex-convolution with a discrete-time window function. 
+
+\includegraphics{Screenshot (171)}
+
+\includegraphics{Screenshot (173)}
+
+The above euation can be interpreted in such a way that illustrates the effect of the window spectrum on the frequency response of the filter.
+
+\includegraphics{Screenshot (168)}
+
+A variety of such windows has been observed and used over the years. Some significant and common windows are listed below.
+
+\begin{enumerate}
+  \item Rectangular.
+  \item von Hann2.
+  \item Hamming.
+  \item Blackman.
+  \item Dolph-Chebyshev.
+  \item Kaiser.
+\end{enumerate}
+
+\subsection{Kaiser Window}
+\hspace{4em}Kaiser window is an one of the most widely used window in fir filter designing. It can be easily achieved the prescribed specifications by using the kaiser window method.This is cited:\cite{ukessay}. The window function is given by,
+
+\includegraphics{Screenshot (169)}
+
+where alpha is an independent parameter. The zero-th order, first kind of  Bessel function is denoted by the I. The value of beta and the bessel function are given in the following manner.
+
+\includegraphics{Screenshot (175)}
+
+\section{Design of Prescribed Bandpass Filter}
+
+\hspace{4em}The designing procedure of the prescribed filter by using kaiser window will be explained. The required parameters would give as below.
+
+\includegraphics{Screenshot (176)}
+
+The above parameters are demonstrated by using a grapgh for further clarifications in the figure 1. 
+ 
+\includegraphics{Screenshot (170)}
+
+Now, the design of prescribed bandpass filter design can be started.
+
+\subsection{Determine the Impulse Response.}
+
+\hspace{4em}The minimum transition width Bt is given by the first equation.The frequency response of a band pass filter is given below. The impulse response can be determined by applying the fourier seriers. The lower and upper cutoff frequencies approximate as follow.
+
+
+\includegraphics{Screenshot (172)}
+The impulse response for a bandpass filter can be determined as below.
+
+
+\includegraphics{Screenshot (177)}
+
+\subsection{Choose the Delta}
+
+\hspace{4em}Delta can be calculated using the following equations. Then the actual stopband loss of the filter can be determined.
+\includegraphics{Screenshot (181)}
+
+\subsection{Chose the Alpha}
+
+\hspace{4em}The independent variable alpha shoud determine at this stage. The following conditions must consider when calculating the alpha.
+
+\includegraphics{Screenshot (182)}
+
+\subsection{Determine the parameter D}
+\hspace{4em}It is the last parameter to determine before move in to the kaiser window calcutions. The parameter D can be obtaind after checking these conditions. 
+
+\includegraphics{Screenshot (178)}
+
+The N must satisfy the following inequality as well. 
+
+\includegraphics{Screenshot (179)}
+
+\subsection{Apply the Kaiser Window}
+
+\hspace{4em}Finally, compute the kaiser window by using the above determined parameters. It is the last step and the filter has been designed.
+
+\includegraphics{Screenshot (180)}
+
+\pagebreak
+
+\chapter{Results}
+\hspace{4em}The given parameters and their calculated values are showing in the table. The index is taken as a user input and calculateed the rest by using Matlab R2018a installed version. 
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+\hline
+Parameter & Value \\
+\hline
+Passband Ripple & 0.0900 dB \\ 
+Minimum Stop Band Attenuation & 45 dB\\ 
+Lower passband edge & 1200 rad/s \\ 
+Lower stopband edge & 1600 rad/s \\ 
+Upper stopband edge & 1050 rad/s \\ 
+Upper passband edge & 1700 rad/s \\ 
+Sampling frequency & 4200 rad/s \\ 
+\hline
+\end{tabular}
+\end{center}
+
+The required impulse response and its frequency domain representation is showing in the figure 2. 
+
+\includegraphics[scale=0.8]{impulse}
+
+The time domain representation of the bandpass kaiser window is showing in the figure 3.
+
+\includegraphics[scale=0.9]{window}
+
+The impulse response of the  kaiser window and its frequency domain representation are showing in the figure 4.
+
+\includegraphics[scale=0.8]{kaiser}
+
+
+The figure 5 is showing the passband, lower stopband and upper stopband in the frequency domain.
+
+\includegraphics[scale=0.5]{bands}
+
+Finally, demonstrate the filter behaviour by using a sample signal and the output is showing in the figure 6.
+
+\includegraphics[scale=0.5]{Output}
+
+The filter output in the frequency domain.
+
+
+\includegraphics[scale=0.5]{Output_freq}
+
+
+
+\pagebreak
+
+\chapter{Conclusion}
+\hspace{4em}Kaiser Window technique is an effective method of planning a FIR filter under the closed form direct methodology, because of its adaptability, the design can oblige many plan prerequisites that are determined on the filter. It  is additionally seen that the computational exertion of designing a filter in this strategy is little. Anyway the major downside of this filter configuration is the high order of filter required. There can be ideal filters of lower request that can accomplish similar determinations. At the point when actualized in equipment higher request filters can be wasteful because of the use of more unit delay adders and multipliers. In the product usage, higher order filters require more calculations per test. Further developed plan procedures must be utilized all together to get optimality.
+
+\medskip
+
+\pagebreak
+
+\begin{thebibliography}{9}
+%book
+\bibitem{A.Antoniou} 
+A. Antoniou. 
+\textit{"Digital Signal Processing," 2005 [Online].}. 
+Available: www.ece.uvic.ca/~dsp.
+
+\bibitem{dspdeer} 
+K. Deergha Rao, M.N.S. Swamy
+\textit{Digital Signal Processing.}. 
+Available: https://link.springer.com/
+
+%site
+\bibitem{ukessay} 
+UKEssays. (November 2018). Filter Design Using Rectangular Window And Kaiser Window Marketing Essay. 
+\\\texttt{https://www.ukessays.com/essays/marketing/filter-design-using-rectangular
+-window-and-kaiser-window-marketing-essay.php?vref=1l}
+\end{thebibliography}
+
+\pagebreak
+
+\appendix
+\chapter{Appendix}
+\section{Matlab Code}
+\lstinputlisting[language=Matlab]{Bandpass_Final.m}
+
+\end{document}

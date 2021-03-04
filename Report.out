@@ -1,0 +1,18 @@
+\BOOKMARK [0][-]{chapter*.1}{Contents}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Abstract}{}% 2
+\BOOKMARK [0][-]{chapter.2}{Introduction}{}% 3
+\BOOKMARK [0][-]{chapter.3}{Basic Theories}{}% 4
+\BOOKMARK [1][-]{section.3.1}{Design Using the Fourier Series}{chapter.3}% 5
+\BOOKMARK [1][-]{section.3.2}{Use of Window Functions}{chapter.3}% 6
+\BOOKMARK [2][-]{subsection.3.2.1}{Kaiser Window}{section.3.2}% 7
+\BOOKMARK [1][-]{section.3.3}{Design of Prescribed Bandpass Filter}{chapter.3}% 8
+\BOOKMARK [2][-]{subsection.3.3.1}{Determine the Impulse Response.}{section.3.3}% 9
+\BOOKMARK [2][-]{subsection.3.3.2}{Choose the Delta}{section.3.3}% 10
+\BOOKMARK [2][-]{subsection.3.3.3}{Chose the Alpha}{section.3.3}% 11
+\BOOKMARK [2][-]{subsection.3.3.4}{Determine the parameter D}{section.3.3}% 12
+\BOOKMARK [2][-]{subsection.3.3.5}{Apply the Kaiser Window}{section.3.3}% 13
+\BOOKMARK [0][-]{chapter.4}{Results}{}% 14
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 15
+\BOOKMARK [0][-]{chapter*.2}{Bibliography}{}% 16
+\BOOKMARK [0][-]{appendix.A}{Appendix}{}% 17
+\BOOKMARK [1][-]{section.A.1}{Matlab Code}{appendix.A}% 18
